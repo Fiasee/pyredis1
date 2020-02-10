@@ -14,10 +14,11 @@ spec:
     metadata:
       name: redis-pod
       labels:
+        name: redis-pod
         app: pyredisapp
     spec:
       containers:
       - name: redis
         image: redis
         ports:
-        - containerPort: 80
+        - containerPort: 6379
