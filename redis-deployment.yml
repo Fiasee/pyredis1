@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  labels:
+    app: pyredisapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: redis-pod
+      app: pyredisapp
+  template:
+    metadata:
+      name: redis-pod
+      labels:
+        app: pyredisapp
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 80

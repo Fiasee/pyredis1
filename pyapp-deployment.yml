@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pyapp-deployment
+  labels:
+    app: pyredisapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: pyapp-pod
+      app: pyredisapp
+  template:
+    metadata:
+      name: pyapp-pod
+      labels:
+        app: pyredisapp
+    spec:
+      containers:
+      - name: pyapp
+        image: fias/pyredis
+        ports:
+        - containerPort: 80
