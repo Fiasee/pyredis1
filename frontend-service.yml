@@ -10,6 +10,6 @@ spec:
   - port: 80
     targetPort: 8082
   selector:
-    name: redis-pod
+    name: pyapp-pod
     app: pyredisapp
   type: LoadBalancer
