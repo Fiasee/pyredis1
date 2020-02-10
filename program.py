@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     #visits = redis.incr('counter')
-    html = "<h3>Welcome!</h3>" \
+    html = "<h3>Welcome Brother!</h3>" \
            #"<b>Visits:</b> {visits}" \
            #"<br/>"
     #return html.format(visits=visits)
