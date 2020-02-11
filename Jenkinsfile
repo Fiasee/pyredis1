@@ -39,13 +39,7 @@ pipeline {
                 sh "docker push DOCKER_IMAGE_NAME:latest"
             }
         }    
-        /***
-        * stage("Deploy to Kubernetes"){
-            kubernetesDeploy(
-                configs: '',
-                kubeconfigId: '',
-                )
-        }**/
+
         stage("Deploy To Staging"){
             when {
                 branch 'master'
@@ -54,11 +48,7 @@ pipeline {
                 CANARY_REPLICAS = 2    
             }
             steps {
-                kubernetesDeploy{
-                    // kubeconfigId: 'kubeconfig',
-                    config: 'kubectl apply -f k8s-deployment/staging-deployment.yml',
-                    enableConfigSubstitution: true
-                }    
+                sh "kubectl apply -f kubernetes/staging-deployment.yml"
             }
         } 
         stage("Deploy To Production"){
@@ -71,16 +61,8 @@ pipeline {
             steps {
                 input 'Deploy to Prod?'
                 milestone(1)
-                kubernetesDeploy{
-                    //kubeconfigId: 'kubeconfig', 
-                    config: 'kubectl apply -f k8s-deployment/staging-deployment.yml',
-                    enableConfigSubstitution: true
-                } 
-                kubernetesDeploy{
-                    kubeconfigId: 'kubeconfig',
-                    config: 'kubectl apply -f k8s-deployment/prod-deployment.yml',
-                    enableConfigSubstitution: true
-                }   
+                sh "kubectl apply -f kubernetes/staging-deployment.yml"
+                sh "kubectl apply -f kubernetes/prod-deployment.yml"
             }
         }    
     }    
