@@ -22,7 +22,7 @@ metadata:
   labels:
     app: pyredisapp
 spec:
-  replicas: $CANARY_REPLICAS
+  replicas: 2
   selector:
     matchLabels:
       app: pyredisapp
