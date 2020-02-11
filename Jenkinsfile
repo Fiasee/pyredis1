@@ -1,4 +1,4 @@
-node{
+pipeline {
     stage("Git Clone"){
         git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/Fiasee/pyredis'
     }
