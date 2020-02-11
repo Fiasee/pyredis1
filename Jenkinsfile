@@ -20,11 +20,17 @@ pipeline {
             }
         }
         stage("Build Docker Image"){
+            when {
+                branch 'master'
+            }
             steps {
                 sh "docker build -t fias/pyredis ."
             }    
         }
         stage("Docker Push"){
+            when {
+                branch 'master'
+            }
             steps {
                 withCredentials([string(credentialsId: 'DOCKER_HUB_CRED', variable: 'DOCKER_HUB_CRED')]) {
                     sh "docker login -u fias -p ${DOCKER_HUB_CRED}"
@@ -41,6 +47,9 @@ pipeline {
                 )
         }**/
         stage("Deploy To Staging"){
+            when {
+                branch 'master'
+            }
             environment{
                 CANARY_REPLICAS = 2    
             }
@@ -53,6 +62,9 @@ pipeline {
             }
         } 
         stage("Deploy To Production"){
+            when {
+                branch 'master'
+            }
             environment{
                 CANARY_REPLICAS = 0    
             }            
