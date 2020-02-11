@@ -23,10 +23,11 @@ pipeline {
         stage("Docker Push"){
             steps {
                 withCredentials([string(credentialsId: 'DOCKER_HUB_CRED', variable: 'DOCKER_HUB_CRED')]) {
-                sh "docker login -u fias -p ${DOCKER_HUB_CRED}"
+                    sh "docker login -u fias -p ${DOCKER_HUB_CRED}"
+        }
                 sh "docker push fias/pyredis"
             }
-        }
+        }    
         /**
         * stage("Deploy to Kubernetes"){
             kubernetesDeploy(
