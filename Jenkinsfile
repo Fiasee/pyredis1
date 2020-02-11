@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE_NAME = "fias/pyredis"
+        CANARY_REPLICAS = 2
     }
     stages {
         stage("Git Clone"){
