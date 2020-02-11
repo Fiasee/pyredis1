@@ -24,7 +24,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh "docker build -t fias/pyredis ."
+                sh "docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} ."
             }    
         }
         stage("Docker Push"){
@@ -35,7 +35,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'DOCKER_HUB_CRED', variable: 'DOCKER_HUB_CRED')]) {
                     sh "docker login -u fias -p ${DOCKER_HUB_CRED}"
         }
-                sh "docker push ${DOCKER_IMAGE_NAME}:2"
+                sh "docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
                 sh "docker push ${DOCKER_IMAGE_NAME}:latest"
             }
         }    
