@@ -1,7 +1,7 @@
 node{
     
     stage("Git Clone"){
-        git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/Fiasee/pyredis'
+        git credentialsId: 'GITHUB_API_ACCESS', url: 'https://github.com/Fiasee/pyredis'
     }
     
     stage("Build"){
