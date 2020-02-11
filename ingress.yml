@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: fanout-ingress
   annotations:
+    kubernetes.io/ingress.class: foo
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
