@@ -35,7 +35,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'DOCKER_HUB_CRED', variable: 'DOCKER_HUB_CRED')]) {
                     sh "docker login -u fias -p ${DOCKER_HUB_CRED}"
         }
-                sh "docker push ${DOCKER_IMAGE_NAME}:1"
+                sh "docker push ${DOCKER_IMAGE_NAME}:2"
                 sh "docker push ${DOCKER_IMAGE_NAME}:latest"
             }
         }    
