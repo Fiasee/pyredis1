@@ -5,11 +5,6 @@ pipeline {
         CANARY_REPLICAS = 2
     }
     stages {
-        stage("Git Clone"){
-            steps {
-                git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/Fiasee/pyredis'
-            }
-        }
         stage("Build"){
             steps {
                 echo 'Running build Automation'
@@ -51,7 +46,6 @@ pipeline {
             steps {
                 kubernetesDeploy{
                     config:  "kubectl apply -f staging-deployment.yml",
-                             "kubectl apply -f ingress.yml"
                 }
             }
         } 
