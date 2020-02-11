@@ -55,7 +55,7 @@ pipeline {
             }
             steps {
                 kubernetesDeploy{
-                    kubeconfigId: 'kubeconfig', 
+                    // kubeconfigId: 'kubeconfig',
                     config: 'kubectl apply -f k8s-deployment/staging-deployment.yml',
                     enableConfigSubstitution: true
                 }    
@@ -72,7 +72,7 @@ pipeline {
                 input 'Deploy to Prod?'
                 milestone(1)
                 kubernetesDeploy{
-                    kubeconfigId: 'kubeconfig', 
+                    //kubeconfigId: 'kubeconfig', 
                     config: 'kubectl apply -f k8s-deployment/staging-deployment.yml',
                     enableConfigSubstitution: true
                 } 
