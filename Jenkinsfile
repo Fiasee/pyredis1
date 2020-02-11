@@ -48,8 +48,8 @@ pipeline {
                 CANARY_REPLICAS = 2    
             }
             steps {
-                sh "kubectl apply -f kubernetes/staging-deployment.yml"
-                sh "kubectl apply -f kubernetes/ingress.yml"
+                sh "kubectl apply -f staging-deployment.yml"
+                sh "kubectl apply -f ingress.yml"
             }
         } 
         stage("Deploy To Production"){
@@ -62,8 +62,8 @@ pipeline {
             steps {
                 input 'Deploy to Prod?'
                 milestone(1)
-                sh "kubectl apply -f kubernetes/staging-deployment.yml"
-                sh "kubectl apply -f kubernetes/prod-deployment.yml"
+                sh "kubectl apply -f staging-deployment.yml"
+                sh "kubectl apply -f prod-deployment.yml"
             }
         }    
     }    
