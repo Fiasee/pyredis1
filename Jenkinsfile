@@ -1,22 +1,31 @@
 pipeline {
     stages {
         stage("Git Clone"){
-            git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/Fiasee/pyredis'
+            steps {
+                git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/Fiasee/pyredis'
+            }
         }
         stage("Build"){
-            
+            steps {
+
+            }
         }
         stage("Test"){
-            
+            steps {
+
+            }
         }
         stage("Build Docker Image"){
-            sh "docker build -t fias/pyredis ."
+            steps {
+                sh "docker build -t fias/pyredis ."
+            }    
         }
         stage("Docker Push"){
-            withCredentials([string(credentialsId: 'DOCKER_HUB_CRED', variable: 'DOCKER_HUB_CRED')]) {
+            steps {
+                withCredentials([string(credentialsId: 'DOCKER_HUB_CRED', variable: 'DOCKER_HUB_CRED')]) {
                 sh "docker login -u fias -p ${DOCKER_HUB_CRED}"
-        }
-        sh "docker push fias/pyredis"
+                sh "docker push fias/pyredis"
+            }
         }
         /**
         * stage("Deploy to Kubernetes"){
@@ -26,7 +35,9 @@ pipeline {
                 )
         }**/
         stage("Deploy To Kubernetes"){
-            sh "kubectl apply -f k8s-deployment/."
-        }
+            steps {
+                sh "kubectl apply -f k8s-deployment/."
+            }
+        }    
     }    
 }
