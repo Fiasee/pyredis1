@@ -8,7 +8,7 @@ metadata:
 spec:
   ports:
   - port: 80
-    targetPort: 8080
+    targetPort: 80
   selector:
     name: pyapp-pod
     app: pyredisapp
@@ -39,6 +39,16 @@ spec:
         image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         ports:
         - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 200m
 ---
 apiVersion: v1
 kind: Service

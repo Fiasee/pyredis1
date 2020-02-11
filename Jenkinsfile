@@ -49,6 +49,7 @@ pipeline {
             }
             steps {
                 sh "kubectl apply -f kubernetes/staging-deployment.yml"
+                sh "kubectl apply -f kubernetes/ingress.yml"
             }
         } 
         stage("Deploy To Production"){
