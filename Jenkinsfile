@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     stages {
         stage("Git Clone"){
             steps {
@@ -7,12 +8,12 @@ pipeline {
         }
         stage("Build"){
             steps {
-
+                echo 'Running build Automation'
             }
         }
         stage("Test"){
             steps {
-
+                echo 'Running Test Automation'
             }
         }
         stage("Build Docker Image"){
@@ -25,7 +26,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'DOCKER_HUB_CRED', variable: 'DOCKER_HUB_CRED')]) {
                     sh "docker login -u fias -p ${DOCKER_HUB_CRED}"
         }
-                sh "docker push fias/pyredis"
+                sh "docker push fias/pyredis:${env.BUILD_NUMBER}"
+                sh "docker push fias/pyredis:latest"
             }
         }    
         /**
