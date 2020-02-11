@@ -45,6 +45,7 @@ pipeline {
             }
             steps {
                 sh "kubectl apply -f staging-deployment.yml"
+                sh "kubectl delete -f ingress.yml"
                 sh "kubectl apply -f ingress.yml"
             }
         } 
