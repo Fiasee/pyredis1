@@ -50,8 +50,8 @@ pipeline {
             }
             steps {
                 kubernetesDeploy{
-                sh "kubectl apply -f staging-deployment.yml"
-                sh "kubectl apply -f ingress.yml"
+                    config:  "kubectl apply -f staging-deployment.yml",
+                             "kubectl apply -f ingress.yml"
                 }
             }
         } 
