@@ -12,29 +12,70 @@ spec:
   selector:
     name: pyapp-pod
     app: pyredisapp
+    track: stable
   type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pyapp-stable
+  name: pyapp-deployment
+  labels:
+    app: pyredisapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pyredisapp
+      track: stable
+  template:
+    metadata:
+      name: pyapp-pod
+      labels:
+        app: pyredisapp
+        track: stable
+    spec:
+      containers:
+      - name: pyapp-container
+        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    name: redis-service
+    app: pyredisapp
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+  selector:
+    name: redis-pod
+    app: pyredisapp
+---    
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
   labels:
     app: pyredisapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: pyapp-pod
+      name: redis-pod
       app: pyredisapp
   template:
     metadata:
-      name: pyapp-pod
+      name: redis-pod
       labels:
-        name: pyapp-pod
+        name: redis-pod
         app: pyredisapp
     spec:
       containers:
-      - name: pyapp
-        image: fias/pyredis
+      - name: redis
+        image: redis
         ports:
-        - containerPort: 80
+        - containerPort: 6379
