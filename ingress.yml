@@ -10,7 +10,7 @@ spec:
       paths:
         - path: /
           backend:
-            serviceName: stable-service
+            serviceName: stable
             servicePort: 80   
         # - path: /dev
         #   backend:
