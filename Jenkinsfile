@@ -32,7 +32,7 @@ pipeline {
                     sh "docker login -u fias -p ${DOCKER_HUB_CRED}"
         }
                 sh "docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
-                sh "docker push ${DOCKER_IMAGE_NAME}:latest"
+                //sh "docker push ${DOCKER_IMAGE_NAME}:latest"
                 //now sent latest build
             }
         }    
