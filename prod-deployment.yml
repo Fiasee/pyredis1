@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: pyapp-container
-        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+        image: fias/pyredis:latest
         ports:
         - containerPort: 80
 ---
