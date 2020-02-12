@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = "fias/pyredis"
+        DOCKER_IMAGE_NAME = "fias/pyredisapp"
         CANARY_REPLICAS = 2
     }
     stages {
