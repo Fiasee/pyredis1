@@ -63,8 +63,13 @@ pipeline {
             steps {
                 input 'Deploy to Prod?'
                 milestone(1)
-                sh "kubectl apply -f staging-deployment.yml"
-                sh "kubectl apply -f prod-deployment.yml"
+                kubernetesDeploy(
+                    kubeconfigId: 'kubeconfig',
+                    configs: 'staging-deployment.yml',
+                    enableConfigSubstitution: true
+                )
+                // sh "kubectl apply -f staging-deployment.yml"
+                // sh "kubectl apply -f prod-deployment.yml"
             }
         }    
     }    
