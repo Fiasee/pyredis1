@@ -7,7 +7,6 @@ metadata:
 spec:
   rules:
     - http:
-      paths:
         - path: /
           backend:
             serviceName: stable-service
