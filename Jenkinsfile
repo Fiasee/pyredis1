@@ -44,8 +44,13 @@ pipeline {
                 CANARY_REPLICAS = 2    
             }
             steps {
-                sh "kubectl apply -f staging-deployment.yml"
-                sh "kubectl apply -f ingress.yml"
+                kubernetesDeploy(
+                    kubeconfigId: 'kubeconfig',
+                    configs: 'staging-deployment.yml',
+                    enableConfigSubstitution: true
+                )
+                // sh "kubectl apply -f staging-deployment.yml"
+                // sh "kubectl apply -f ingress.yml"
             }
         } 
         stage("Deploy To Production"){
