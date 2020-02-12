@@ -9,11 +9,11 @@ spec:
   - host: example.com
     http:
       paths:
-        - path: /
+        - path: /dev
           backend:
-            serviceName: stable
-            servicePort: 80   
-        # - path: /dev
+            serviceName: canary
+            servicePort: 8080   
+        # - path: /
         #   backend:
-        #     serviceName: canary
-        #     servicePort: 8080              
+        #     serviceName: stable
+        #     servicePort: 80              
