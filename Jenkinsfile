@@ -33,7 +33,7 @@ pipeline {
         }
                 sh "docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
                 sh "docker push ${DOCKER_IMAGE_NAME}:latest"
-                //sent latest build
+                //now sent latest build
             }
         }    
 
