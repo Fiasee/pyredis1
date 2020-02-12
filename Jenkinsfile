@@ -65,7 +65,7 @@ pipeline {
                 milestone(1)
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
-                    configs: 'staging-deployment.yml',
+                    configs: 'prod-deployment.yml',
                     enableConfigSubstitution: true
                 )
                 // sh "kubectl apply -f staging-deployment.yml"
