@@ -10,7 +10,7 @@ spec:
   - port: 80
     targetPort: 80
   selector:
-    name: pyapp-prod
+    name: pyapp-prod-pod
     app: pyredisapp
     track: stable
   type: LoadBalancer
@@ -25,18 +25,18 @@ spec:
   replicas: $PROD_REPLICAS
   selector:
     matchLabels:
-      name: pyapp-prod
+      name: pyapp-prod-pod
       track: stable
   template:
     metadata:
-      name: pyapp-prod
+      name: pyapp-prod-pod
       labels:
-        name: pyapp-prod
+        name: pyapp-prod-pod
         app: pyredisapp
         track: stable
     spec:
       containers:
-      - name: pyapp-container
+      - name: pyapp-prod-container
         image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         ports:
         - containerPort: 80

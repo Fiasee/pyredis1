@@ -10,7 +10,7 @@ spec:
   - port: 80
     targetPort: 80
   selector:
-    name: pyapp-pod
+    name: pyapp-canary-pod
     app: pyredisapp
     track: canary
   type: LoadBalancer
@@ -25,18 +25,18 @@ spec:
   replicas: $CANARY_REPLICAS
   selector:
     matchLabels:
-      name: pyapp-pod
+      name: pyapp-canary-pod
       track: canary
   template:
     metadata:
-      name: pyapp-pod
+      name: pyapp-canary-pod
       labels:
-        name: pyapp-pod
+        name: pyapp-canary-pod
         app: pyredisapp
         track: canary
     spec:
       containers:
-      - name: pyapp-container
+      - name: pyapp-canary-container
         image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         ports:
         - containerPort: 80    
