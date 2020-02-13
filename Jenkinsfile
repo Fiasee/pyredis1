@@ -59,14 +59,15 @@ pipeline {
                 branch 'master'
             }
             environment{
-                CANARY_REPLICAS = 0    
+                CANARY_REPLICAS = 0
+                PROD_REPLICAS = 2    
             }            
             steps {
                 input 'Deploy to Prod?'
                 milestone(1)
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
-                    configs: 'prod-deployment.yml',
+                    configs: { 'staging-deployment.yml', 'prod-deployment.yml' },
                     enableConfigSubstitution: true
                 )
                 // sh "kubectl apply -f staging-deployment.yml"
