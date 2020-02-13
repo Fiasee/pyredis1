@@ -9,4 +9,4 @@ How to use:
   ```bastion-publi-ip:8080```
   Login with jenkins/Password123
   
-3. Make changes to your application here, and enjoy it getting deployed on the cluster!
+3. Make changes to your application here, and enjoy seeing it getting deployed on the cluster!
