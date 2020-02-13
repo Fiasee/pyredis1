@@ -18,7 +18,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pyapp-deployment
+  name: pyapp-canary-deployment
   labels:
     app: pyredisapp
 spec:
