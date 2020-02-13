@@ -13,7 +13,7 @@ spec:
     name: pyapp-pod
     app: pyredisapp
     track: canary
-  type: NodePort
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -22,15 +22,16 @@ metadata:
   labels:
     app: pyredisapp
 spec:
-  replicas: 2
+  replicas: $CANARY_REPLICAS
   selector:
     matchLabels:
-      app: pyredisapp
+      name: pyapp-pod
       track: canary
   template:
     metadata:
       name: pyapp-pod
       labels:
+        name: pyapp-pod
         app: pyredisapp
         track: canary
     spec:
