@@ -8,10 +8,13 @@ metadata:
 spec:
   ports:
   - port: 80
+    targetPort: 80
   selector:
     name: pyapp-canary-pod
     app: pyredisapp
     track: canary
+  type: LoadBalancer 
+   
 ---
 apiVersion: apps/v1
 kind: Deployment
